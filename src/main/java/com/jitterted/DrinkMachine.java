@@ -11,8 +11,8 @@ import static com.jitterted.IngredientName.*;
 
 public class DrinkMachine {
 
-    private final List<Drink> drinkList = new ArrayList<>();
-    private final List<Ingredient> ingredientList = new ArrayList<>();
+    private final List<Drink> drinkList = new ArrayList<>(); //primitive obsession
+    private final List<Ingredient> ingredientList = new ArrayList<>(); //primitive obsession
 
     public static void main(String[] args) {
         DrinkMachine drinkMachine = new DrinkMachine();
@@ -133,7 +133,7 @@ public class DrinkMachine {
     private void displayInventory() {
         System.out.println("\nIngredient Inventory:\n");
         for (Ingredient ingredient : ingredientList) {
-            System.out.println(ingredient.getName().displayName() + ", " + ingredient.getStock());
+            System.out.println(ingredient.getName().displayName() + ", " + ingredient.displayStock());
         }
     }
 
@@ -149,7 +149,7 @@ public class DrinkMachine {
             for (Ingredient ingredient : ingredientList) {
                 Recipe recipe = drink.getRecipe();
                 if (recipe.hasIngredient(ingredient)) {
-                    ingredient.setStock(ingredient.getStock() - recipe.quantityNeededFor(ingredient));
+                    ingredient.reduceInventory(recipe);
                 }
             }
         } else {
@@ -158,14 +158,14 @@ public class DrinkMachine {
     }
 
     public void restockIngredients() {
-        resetStock();
+        resetIngredients();
         updateMakeable();
         displayInventoryAndMenu();
     }
 
-    private void resetStock() {
+    private void resetIngredients() {
         for (Ingredient ingredient : ingredientList) {
-            ingredient.setStock(10);
+            ingredient.reset();
         }
     }
 

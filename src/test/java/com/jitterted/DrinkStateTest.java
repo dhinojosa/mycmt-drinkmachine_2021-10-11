@@ -12,10 +12,8 @@ class DrinkStateTest {
 
   @Test
   public void drinkIsMakeableWhenEnoughInventoryForRecipe() throws Exception {
-    Ingredient coffee = new Ingredient(COFFEE, 0.0);
-    coffee.setStock(1);
-    Ingredient sugar = new Ingredient(SUGAR, 0.0);
-    sugar.setStock(2);
+    Ingredient coffee = new Ingredient(COFFEE, 0.0, 1);
+    Ingredient sugar = new Ingredient(SUGAR, 0.0, 2);
     List<Ingredient> ingredients = List.of(coffee, sugar);
     Recipe recipe = new RecipeFactory(ingredients).create("Coffee", "Sugar");
     Drink drink = new Drink("test", recipe);
@@ -28,10 +26,8 @@ class DrinkStateTest {
 
   @Test
   public void drinkIsNotMakeableWhenInsufficientInventoryForRecipe() throws Exception {
-    Ingredient coffee = new Ingredient(COFFEE, 0.0);
-    coffee.setStock(0);
-    Ingredient sugar = new Ingredient(SUGAR, 0.0);
-    sugar.setStock(2);
+    Ingredient coffee = new Ingredient(COFFEE, 0.0, 0);
+    Ingredient sugar = new Ingredient(SUGAR, 0.0, 2);
     List<Ingredient> ingredients = List.of(coffee, sugar);
     Recipe recipe = new RecipeFactory(ingredients).create("Coffee");
     Drink drink = new Drink("test", recipe);
